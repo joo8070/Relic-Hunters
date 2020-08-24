@@ -15,6 +15,7 @@ enum class PLAYSTATE
 class playGround : public gameNode
 {
 private:	
+
 	stageManager*  _stageManager;
 	UIManager*     _uiManager;
 	player*        _player;

@@ -2,6 +2,14 @@
 #include "singletonBase.h"
 #include "image.h"
 
+struct tagShake
+{
+	bool isShakeCamera;
+	int  shakePower;
+	int  shakeTime;
+	int  shakeCount;
+};
+
 class cameraManager : public singletonBase<cameraManager>
 {
 private:
@@ -21,12 +29,16 @@ private:
 	float _minX, _maxX; // x 좌표의 가능한 범위
 	float _minY, _maxY; // y 좌표의 가능한 범위
 
+	tagShake _shake;
+
 public:
 	cameraManager();
 	~cameraManager();
 
 	HRESULT init();
+	void update();
 	void release();
+
 
 	void setConfig(float left, float top, float width, float height, float minL, float minT, float maxL, float maxT);
 	void setConfigCenter(float x, float y, float width, float height, float minX, float minY, float maxX, float maxY);
@@ -36,9 +48,11 @@ public:
 	float getY();
 	void setL(float newL);
 	void setT(float newT);
-	void setX(float newX);
-	void setY(float newY);
+	void setX(float relativeX);
+	void setY(float relativeY);
+	void setXY(float x, float y);
 	void movePivot(float offsetX, float offsetY);
+	void shakeCamera(int shakePower, int shakeTime);
 
 	float getRelativeL(float left);
 	LONG getRelativeL(LONG left);

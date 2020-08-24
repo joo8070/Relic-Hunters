@@ -369,6 +369,7 @@ void playGround::gameStart()
 	_player->update();
 	_stageManager->update();
 	EFFECTMANAGER->update();
+	CAMERAMANAGER->update();
 	_uiManager->update();
 
 }

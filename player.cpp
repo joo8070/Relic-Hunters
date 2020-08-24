@@ -99,7 +99,7 @@ void player::render()
 
 	if (_isShot)
 	{
-		CAMERAMANAGER->zoom(getMemDC(), 1.01f);
+		CAMERAMANAGER->shakeCamera(2, 10);
 	}
 }
 
@@ -458,9 +458,7 @@ void player::refreshCenter()
 	_pos.x = (_rc.left + _rc.right) / 2;
 	_pos.y = (_rc.top + _rc.bottom) / 2;
 
-	CAMERAMANAGER->setX(_pos.x); // 朝五虞 実特
-	CAMERAMANAGER->setY(_pos.y);
-	_rc.MYRectMakeCenter(_pos.x, _pos.y, 40, 50);
+	CAMERAMANAGER->setXY(_pos.x , _pos.y); // 朝五虞 実特
 }
 
 void player::gunSetting()

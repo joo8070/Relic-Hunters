@@ -4,6 +4,7 @@
 
 cameraManager::cameraManager()
 {
+	_shake.isShakeCamera = false;
 }
 
 cameraManager::~cameraManager()
@@ -13,6 +14,19 @@ cameraManager::~cameraManager()
 HRESULT cameraManager::init()
 {
 	return S_OK;
+}
+
+void cameraManager::update()
+{
+	if (_shake.isShakeCamera)
+	{
+		_shake.shakeCount++;
+		if (_shake.shakeCount % _shake.shakeTime == 0)
+		{
+			_shake.shakeCount = 0;
+			_shake.isShakeCamera = false;
+		}
+	}
 }
 
 void cameraManager::release()
@@ -95,22 +109,82 @@ void cameraManager::setT(float newT)
 }
 
 // 카메라의 기준점 X을 정함
-void cameraManager::setX(float newX)
+void cameraManager::setX(float relativeX)
 {
-	newX = min(_maxX, newX);
-	newX = max(_minX, newX);
-	_x = floor(newX);
-	_L = _x - (_width / 2);
+	if (_shake.isShakeCamera)
+	{
+		int rnd = RND->getInt(2) == 1 ? -1 : 1;
+		float newX = relativeX + rnd * _shake.shakePower;
+		newX = min(_maxX, newX);
+		newX = max(_minX, newX);
+		if (newX == _minX)
+		{
+			if (rnd * _shake.shakePower <= 0)
+				newX -= rnd * _shake.shakePower;
+			else
+				newX += rnd * _shake.shakePower;
+		}
+		else if (newX == _maxX)
+		{
+			if (rnd * _shake.shakePower <= 0)
+				newX -= rnd * _shake.shakePower;
+			else
+				newX += rnd * _shake.shakePower;
+		}
+		_x = floor(newX);
+		_L = _x - (_width * 0.5f);
+	}
+	else
+	{
+		relativeX = min(_maxX, relativeX);
+		relativeX = max(_minX, relativeX);
+		_x = floor(relativeX);
+		_L = _x - (_width * 0.5f);
+	}
 }
 
 // 카메라의 기준점 Y을 정함
-void cameraManager::setY(float newY)
+void cameraManager::setY(float relativeY)
 {
-	newY = min(_maxY, newY);
-	newY = max(_minY, newY);
-	_y = floor(newY);
-	_T = _y - (_height / 2);
+	if (_shake.isShakeCamera)
+	{
+		int rnd = RND->getInt(2) == 1 ? -1 : 1;
+		float newY = relativeY + rnd * _shake.shakePower;
+		newY = min(_maxY, newY);
+		newY = max(_minY, newY);
+		if (newY == _minY)
+		{
+			if (rnd * _shake.shakePower <= 0)
+				newY -= rnd * _shake.shakePower;
+			else
+				newY += rnd * _shake.shakePower;
+		}
+		else if (newY == _maxY)
+		{
+			if (rnd * _shake.shakePower <= 0)
+				newY -= rnd * _shake.shakePower;
+			else
+				newY += rnd * _shake.shakePower;
+		}
+		_y = floor(newY);
+		_T = _y - (_height * 0.5f);
+	}
+	else
+	{
+
+		relativeY = min(_maxY, relativeY);
+		relativeY = max(_minY, relativeY);
+		_y = floor(relativeY);
+		_T = _y - (_height * 0.5f);
+	}
 }
+
+void cameraManager::setXY(float x, float y)
+{
+	setX(x);
+	setY(y);
+}
+
 
 // 카메라의 기준점을 이동시킴
 void cameraManager::movePivot(float offsetX, float offsetY)
@@ -120,6 +194,16 @@ void cameraManager::movePivot(float offsetX, float offsetY)
 	setX(_x + offsetX);
 	setY(_y + offsetY);
 }
+
+
+void cameraManager::shakeCamera(int shakePower, int shakeTime)
+{
+	_shake.shakePower = shakePower;
+	_shake.shakeTime = shakeTime;
+	_shake.isShakeCamera = true;
+}
+
+
 
 // 카메라의 LEFT를 기준으로 상대좌표 left값을 구함
 float cameraManager::getRelativeL(float left)

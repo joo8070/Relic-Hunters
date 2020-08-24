@@ -78,7 +78,6 @@ void gameNode::release()
 
 void gameNode::update()
 {
-
 }
 
 void gameNode::render()

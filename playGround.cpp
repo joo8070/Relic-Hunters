@@ -39,7 +39,7 @@ HRESULT playGround::init()
 
 	_intro = IMAGEMANAGER->findImage("intro");
 	_loading = IMAGEMANAGER->findImage("loading");
-	
+	_isStart = true;
 	return S_OK;
 }
 
@@ -341,11 +341,6 @@ void playGround::gameReady()
 			_loading->setFrameX(0);
 		}
 		_loadingCount = 0;
-	}
-
-	if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
-	{
-		_isStart = true;
 	}
 
 	if (_isStart)

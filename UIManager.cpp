@@ -2,7 +2,7 @@
 #include "UIManager.h"
 #include "player.h"
 #include "stageManager.h"
-HRESULT UIManager::init()
+HRESULT UIManager::init()	
 {
 	_gameoverImg = IMAGEMANAGER->findImage("gameover_UI");
 	_gameoverPos.x = CAMERAMANAGER->getX();

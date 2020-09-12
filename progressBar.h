@@ -7,10 +7,10 @@ private:
 	RECT _rcProgress;
 	float _x, _y;
 
-	float _width;	//100%
+	float _width;
 
-	image* _progressBarTop;
-	image* _progressBarBottom;
+	image* _progressBarTop;       
+	image* _progressBarBottom;    
 
 public:
 	progressBar();

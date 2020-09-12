@@ -60,10 +60,7 @@ void weapon::reload()
 
 	if (_isReload)
 	{
-
 		_reloadTime++;
-
-
 		if (_reloadTime > 132)
 		{
 			SOUNDMANAGER->play("ÀåÀü", 0.3f);

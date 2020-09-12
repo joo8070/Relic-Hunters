@@ -281,9 +281,6 @@
     <ClCompile Include="objectManager.cpp">
       <Filter>playGround\object</Filter>
     </ClCompile>
-    <ClCompile Include="playGround+Coliision.cpp">
-      <Filter>playGround</Filter>
-    </ClCompile>
     <ClCompile Include="stageShip.cpp">
       <Filter>playGround\stage</Filter>
     </ClCompile>

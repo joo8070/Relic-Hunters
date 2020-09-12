@@ -20,8 +20,8 @@ struct tagBullet
 
 class bullet : public gameNode
 {
-	vector<tagBullet*>			 _vPlayerBullet;
-	vector<tagBullet*>::iterator _viPlayerBullet;
+	vector<tagBullet*>			  _vPlayerBullet;
+	vector<tagBullet*>::iterator  _viPlayerBullet;
 
 	vector<tagBullet*>            _vEnemyBullet;
 	vector<tagBullet*>::iterator  _viEnemyBullet;

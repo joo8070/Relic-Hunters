@@ -40,26 +40,15 @@ void progressBar::update()
 
 void progressBar::render()
 {
-	CAMERAMANAGER->render(getMemDC(), _progressBarBottom, (_rcProgress.left + _progressBarBottom->getWidth() / 2), _y + _progressBarBottom->getHeight() / 2, 0, 0, _progressBarBottom->getWidth(), _progressBarBottom->getHeight());
-	CAMERAMANAGER->render(getMemDC(), _progressBarTop, (_rcProgress.left + _progressBarBottom->getWidth() / 2), _y + _progressBarBottom->getHeight() / 2, 0, 0, _width , _progressBarBottom->getHeight());
+	CAMERAMANAGER->render(getMemDC(), _progressBarBottom, (_rcProgress.left + _progressBarBottom->getWidth() / 2),
+		_y + _progressBarBottom->getHeight() / 2, 0, 0, _progressBarBottom->getWidth(), _progressBarBottom->getHeight());
 
-
-	//IMAGEMANAGER->render("backBar", getMemDC(),
-	//	_rcProgress.left + _progressBarBottom->getWidth() / 2,
-	//	_y + _progressBarBottom->getHeight() / 2,
-	//	0, 0,
-	//	_progressBarBottom->getWidth(), _progressBarBottom->getHeight());
-
-	//IMAGEMANAGER->render("frontBar", getMemDC(),
-	//	_rcProgress.left + _progressBarBottom->getWidth() / 2,
-	//	_y + _progressBarBottom->getHeight() / 2,
-	//	0, 0,
-	//	_width, _progressBarBottom->getHeight());
+	CAMERAMANAGER->render(getMemDC(), _progressBarTop, (_rcProgress.left + _progressBarBottom->getWidth() / 2),
+		_y + _progressBarBottom->getHeight() / 2, 0, 0, _width , _progressBarBottom->getHeight());
 
 }
 
 void progressBar::setGauge(float currentGauge, float maxGauge)
 {
-	//백분율 구하는 공식이에여!
 	_width = (currentGauge / maxGauge) * _progressBarBottom->getWidth();
 }
